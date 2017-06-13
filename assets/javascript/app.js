@@ -1,18 +1,15 @@
 //document on ready
 $(document).ready(function() {
   //global variable. Array of categories for giphy site
-  var GifDiv = $("#gif-view");
   var categories = ["Australian Shepherd", "Shih Tzu", "Golden Retriever", "Border Collie", "Labrador Retriever", "Boxer", "Rottweiler", "Pug", "Bulldog", "Doberman Pinscher", "Beagle"];
   //functions
   function renderButtons() {
-    // Deleting the buttons prior to adding new buttons. If this step isn't
-    //done you will have repeat buttons
+    // Deleting the buttons prior to adding new buttons.
     $("#buttons-view").empty();
     // Looping through the array of categories
     for (var i = 0; i < categories.length; i++) {
       // Then dynamically generating buttons for each category in the array
-      var button = $("<button type='button' class='btn btn-info'>");
-
+      var button = $("<button type='button' class='btn btn-danger'>");
       // Adding a class of movie to our button
       button.addClass("categories");
       // Adding a data-attribute
@@ -25,8 +22,8 @@ $(document).ready(function() {
   }
 
   function newButton(categories) {
-    var button = $("<button type='button' class='btn btn-info addbutton'>");
-    // Adding a class of movie to our button
+    var button = $("<button type='button' class='btn btn-danger'>");
+    // Adding a class of categories to our button
     button.addClass("categories");
     // Adding a data-attribute
     button.attr("data-name", categories);
@@ -34,10 +31,8 @@ $(document).ready(function() {
     button.text(categories);
     // Adding the button to the buttons-view div
     $("#buttons-view").append(button)
-
-
   }
-  // This function handles events where a movie button is clicked
+  // This function handles events where a category button is clicked
   $("#add-category").on("click", function(event) {
     //event.preventDefault takes away default values of the click event
     event.preventDefault();
@@ -50,7 +45,7 @@ $(document).ready(function() {
     //renderButtons();
   });
   // Adding a click event listener to all elements with a class of "categories"
-  $(document).on("click", ".categories", displayCategoryGif);
+  $("#buttons-view").on("click", ".categories", displayCategoryGif);
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
@@ -58,7 +53,7 @@ $(document).ready(function() {
   // Create an AJAX call to retrieve data
   function displayCategoryGif() {
     var dogs = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + dogs + "&api_key=dc6zaTOxFJmzC&limit=9";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dogs + "&api_key=dc6zaTOxFJmzC&limit=9";
     $("#gif-view").html("");
     $.ajax({
         url: queryURL,
@@ -69,7 +64,7 @@ $(document).ready(function() {
         console.log(response);
         for (i = 0; i < retrieval.length; i++) {
           var gifDisplay = $("<div class='dogs col-lg-4'>");
-          var rating = $("<p>").text("Rating: " + retrieval[i].rating);
+          var rating = $("<p class='rating'>").text("Rating: " + retrieval[i].rating);
           var giphyImage = $("<img>");
           giphyImage.attr("src", retrieval[i].images.fixed_height_small_still.url);
           giphyImage.attr("data-still", retrieval[i].images.fixed_height_small_still.url);

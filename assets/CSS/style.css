@@ -1,27 +1,53 @@
-body {
-  margin-left: 50px;
-  background-image: url("../images/bones.jpg");
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+    body {
+      margin-left: 50px;
+      background-color: #777;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 
-.categories {
-  margin-right: 5px;
-  margin-bottom: 10px;
-  margin-top: 1%;
-}
+    .categories {
+      margin-right: 5px;
+      margin-bottom: 10px;
+      margin-top: 1%;
+      margin-bottom: 1%;
+      float: left;
+    }
 
-img {
-  width: 75%;
-  height: 150px;
-  float: left;
-  display: inline-block;
-  vertical-align: top;
-  margin-bottom: 20px;
-}
+    img {
+      width: 75%;
+      height: 250px;
+      float: left;
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 20px;
+      border: 10px solid #fff;
+      border-bottom: 45px solid #fff;
+      -webkit-box-shadow: 3px 3px 3px #777;
+      -moz-box-shadow: 3px 3px 3px #777;
+      box-shadow: 3px 3px 3px #777;
+    }
 
-.addbutton {
-  float: left;
-}
+    .rating {
+      position: absolute;
+      justify-content: center;
+      width: 100%;
+      font: 400 18px/1 'Kaushan Script', cursive;
+      color: black;
+      margin-top: 220px;
+      margin-left: 140px;
+    }
+
+    #gif-view {
+      margin-top: 2%;
+    }
+
+    form {
+      margin-right: 2%;
+    }
+
+    .addbutton {
+      margin-right: 7%;
+      margin-top: 2%;
+    }
