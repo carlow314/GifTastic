@@ -1,56 +1,31 @@
-//document on ready
+//document on ready function
 $(document).ready(function() {
-  //global variable. Array of categories for giphy site
+  //Array of categories for giphy site. This will be used in creation of category buttons
   var categories = ["Australian Shepherd", "Shih Tzu", "Golden Retriever", "Border Collie", "Labrador Retriever", "Boxer", "Rottweiler", "Pug", "Bulldog", "Doberman Pinscher", "Beagle"];
-  //functions
+
+
+  //functions for application//
+  ///////////////////////////
+  //function to create buttons based on the array
   function renderButtons() {
-    // Deleting the buttons prior to adding new buttons.
     $("#buttons-view").empty();
-    // Looping through the array of categories
     for (var i = 0; i < categories.length; i++) {
-      // Then dynamically generating buttons for each category in the array
       var button = $("<button type='button' class='btn btn-danger'>");
-      // Adding a class of movie to our button
       button.addClass("categories");
-      // Adding a data-attribute
       button.attr("data-name", categories[i]);
-      // Providing the initial button text
       button.text(categories[i]);
-      // Adding the button to the buttons-view div
       $("#buttons-view").append(button);
     }
   }
-
+//function for adding a new button to the array of existing buttons
   function newButton(categories) {
     var button = $("<button type='button' class='btn btn-danger'>");
-    // Adding a class of categories to our button
     button.addClass("categories");
-    // Adding a data-attribute
     button.attr("data-name", categories);
-    // Providing the initial button text
     button.text(categories);
-    // Adding the button to the buttons-view div
     $("#buttons-view").append(button)
   }
-  // This function handles events where a category button is clicked
-  $("#add-category").on("click", function(event) {
-    //event.preventDefault takes away default values of the click event
-    event.preventDefault();
-    // This line grabs the input from the textbox
-    var newCategory = $("#category-input").val().trim();
-    newButton(newCategory);
-    // Adding movie from the textbox to our array
-    //categories.push(newCategory);
-    // Calling renderButtons which handles the processing of our movie array
-    //renderButtons();
-  });
-  // Adding a click event listener to all elements with a class of "categories"
-  $("#buttons-view").on("click", ".categories", displayCategoryGif);
-
-  // Calling the renderButtons function to display the intial buttons
-  renderButtons();
-
-  // Create an AJAX call to retrieve data
+//function to grab API data//
   function displayCategoryGif() {
     var dogs = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dogs + "&api_key=dc6zaTOxFJmzC&limit=9";
@@ -78,6 +53,19 @@ $(document).ready(function() {
         }
       })
   }
+
+  //ON CLICK EVENT HANDLERS//
+  //////////////////////////
+  // This on click adds a new button
+  $("#add-category").on("click", function(event) {
+    event.preventDefault();
+    var newCategory = $("#category-input").val().trim();
+    newButton(newCategory);
+  });
+  // Adding a click event listener to all elements with a class of "categories"
+  //This will call the API when a button is clicked
+  $("#buttons-view").on("click", ".categories", displayCategoryGif);
+  renderButtons();
 
   //click function to pause and animate gifs
   $("#gif-view").on("click", ".gif", function() {
